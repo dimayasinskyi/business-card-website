@@ -1,0 +1,6 @@
+business_card/media
+business_card/db.sqlite3
+venv
+.env
+.env.dev
+.env.prod

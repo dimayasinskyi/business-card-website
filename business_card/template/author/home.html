@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{ user.get_full_name }}{% endblock %}
+
+{% block head %}
+<style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .profile-img {
+      max-width: 200px;
+      border-radius: 50%;
+      border: 3px solid #0d6efd;
+      margin-bottom: 20px;
+    }
+    .about-text {
+      font-size: 1.1rem;
+      color: #495057;
+    }
+    footer {
+      background-color: #0d6efd;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 50px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container text-center mt-5">
+  <h1 class="mb-4">Welcome to my business card website!</h1>
+  <h2 class="mb-3">{{ user.get_full_name }}</h2>
+  {% if user.photo %}
+    <img src="{{ user.photo.url }}" alt="{{ user.username }}" class="profile-img">
+  {% endif %}
+  <p class="about-text mt-3">{{ user.about }}</p>
+</main>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Contact{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+<main class="container mt-5">
+    <h1 class="text-center">Contact me</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-5">
+            <h3>My contacts</h3>
+            {% if contact %}
+                <ul class="list-group">
+                    {% if contact.phone %}<li class="list-group-item"><strong>📞 Телефон:</strong> {{ contact.phone }}</li>{% endif %}
+                    {% if contact.telegram %}<li class="list-group-item"><strong>💬 Telegram:</strong> <a href="{{ contact.telegram }}" target="_blank">{{ contact.telegram }}</a></li>{% endif %}
+                    {% if contact.linkedin %}<li class="list-group-item"><strong>💼 LinkedIn:</strong> <a href="{{ contact.linkedin }}" target="_blank">{{ contact.linkedin }}</a></li>{% endif %}
+                    {% if contact.github %}<li class="list-group-item"><strong>🐙 GitHub:</strong> <a href="{{ contact.github }}" target="_blank">{{ contact.github }}</a></li>{% endif %}
+                    {% if contact.address %}<li class="list-group-item"><strong>📍 Адреса:</strong> {{ contact.address }}</li>{% endif %}
+                </ul>
+            {% else %}
+                <p>Contacts have not been added yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-7">
+            <h3>Write to me</h3>
+            {% include 'included/contact_form.html' %}
+        </div>
+    </div>
+</main>
+{% endblock %}
