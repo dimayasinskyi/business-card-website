@@ -3,38 +3,42 @@
 
 {% block title %}{{ user.get_full_name }}{% endblock %}
 
-{% block head %}
-<style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .profile-img {
-      max-width: 200px;
-      border-radius: 50%;
-      border: 3px solid #0d6efd;
-      margin-bottom: 20px;
-    }
-    .about-text {
-      font-size: 1.1rem;
-      color: #495057;
-    }
-    footer {
-      background-color: #0d6efd;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      margin-top: 50px;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<main class="container text-center mt-5">
+<!-- <main class="container text-center mt-5">
   <h1 class="mb-4">Welcome!</h1>
   <h2 class="mb-3">{{ user.get_full_name }}</h2>
   {% if user.photo %}
     <img src="{{ user.photo.url }}" alt="{{ user.username }}" class="profile-img">
   {% endif %}
   <p class="about-text mt-3">{{ user.about }}</p>
-</main>
+</main> -->
+<section class="section">
+  <div class="container hero">
+    <div>
+      <h1>{{ user.get_full_name }} <span class="badge">django developer</span></h1>
+      <p>{{ user.about }}</p>
+      <div class="cta">
+        <a class="btn primary" href="{% url 'author:portfolio' %}">View works</a>
+        <a class="btn ghost" href="{% url 'author:contact' %}">Contact</a>
+      </div>
+    </div>
+
+    <aside class="hero-card" aria-label="Краткая статистика">
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="num">100%</div>
+          <div class="cap">Адаптивность</div>
+        </div>
+        <div class="stat">
+          <div class="num">0 JS</div>
+          <div class="cap">Только CSS</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span aria-hidden="true">⚡</span> Быстро</div>
+          <div class="cap">Оптимально</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
 {% endblock %}

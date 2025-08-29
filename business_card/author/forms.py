@@ -15,11 +15,11 @@ class ContactForm(forms.Form):
     Validation:
     - Checks if one field is from phone, message, file, if not then returns ValidationError.
     """
-    name = forms.CharField(required=False, label="Name", max_length=100, widget=forms.TextInput(attrs={"class": "form-control"}))
-    email = forms.EmailField(required=False, label="Email", widget=forms.EmailInput(attrs={"class": "form-control"}))
-    phone = forms.CharField(required=False, label="Phone", max_length=16, widget=forms.TextInput(attrs={"class": "form-control", "rows": 4}))
-    message = forms.CharField(required=False, label="Message", widget=forms.Textarea(attrs={"class": "form-control"}))
-    file = forms.FileField(required=False, label="Vacancy file", widget=forms.ClearableFileInput(attrs={"class": "form-control"}))
+    name = forms.CharField(required=False, label="Name", max_length=100, widget=forms.TextInput())
+    email = forms.EmailField(required=False, label="Email", widget=forms.EmailInput())
+    phone = forms.CharField(required=False, label="Phone", max_length=16, widget=forms.TextInput())
+    message = forms.CharField(required=False, label="Message", widget=forms.Textarea())
+    file = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={"class": "file-input", "id": "vacancy-file"}))
 
     def clean(self):
         """Checks if one field is from phone, message, file, if not then returns ValidationError."""

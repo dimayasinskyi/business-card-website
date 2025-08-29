@@ -4,32 +4,90 @@
 {% block title %}Portfolio{% endblock %}
 
 {% block head %}
+<style>
+    .tile {
+        position: relative;
+        width: 300px;
+        /* або 100% */
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 1rem;
+        overflow: hidden;
+        cursor: pointer;
+    }
 
+    /* прихована панель */
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        color: white;
+        padding: 1rem;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .overlay a {
+        color: var(--accent, #4da3ff);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .tile.active .overlay {
+        transform: translateY(0);
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-  <div class="container py-5">
-    <h1 class="mb-4">My Projects</h1>
-
-    <div class="row g-4">
-      {% for project in projects %}
-      <div class="col-md-4">
-        <div class="card shadow-sm h-100">
-          {% if project.photo %}
-          <img src="{{ project.photo.url }}" class="card-img-top" alt="{{ project.name }}">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ project.name }}</h5>
-            <p class="card-text">
-              {% if project.url %}<a href="{{ project.url }}" target="_blank">Visit Project</a><br>{% endif %}
-              {% if project.github %}<a href="{{ project.github }}" target="_blank">GitHub Repo</a>{% endif %}
-            </p>
-          </div>
+<section id="gallery" class="section">
+    <div class="container">
+        <h2 style="margin-top:0">My projects</h2>
+        <div class="gallery">
+            {% for project in projects %}
+            {% if project.photo %}
+            <figure class="tile"
+                style="background-image: url('{{ project.photo.url }}'); background-size: cover; background-position: center;">
+                <div class="overlay">
+                    <h3>{{ project.name }}</h3>
+                    {% if project.github %}
+                    <p>GitHub: <a href="{{ project.github }}" target="_blank">{{ project.github }}</a></p>
+                    {% endif %}
+                    {% if project.url %}
+                    <p>Web: <a href="{{ project.url }}" target="_blank">{{ project.url }}</a></p>
+                    {% endif %}
+                </div>
+            </figure>
+            {% else %}
+            <figure class="tile">
+                <div class="overlay">
+                    <h3>{{ project.name }}</h3>
+                    {% if project.github %}
+                    <p>GitHub: <a href="{{ project.github }}" target="_blank">{{ project.github }}</a></p>
+                    {% endif %}
+                    {% if project.url %}
+                    <p>Web: <a href="{{ project.url }}" target="_blank">{{ project.url }}</a></p>
+                    {% endif %}
+                </div>
+            </figure>
+            {% endif %}
+            {% empty %}
+            <p>No projects added yet.</p>
+            {% endfor %}
         </div>
-      </div>
-      {% empty %}
-        <p>No projects added yet.</p>
-      {% endfor %}
     </div>
-  </div>
+</section>
+<script>
+    document.querySelectorAll(".tile").forEach(tile => {
+        tile.addEventListener("click", () => {
+            tile.classList.toggle("active");
+        });
+    });
+</script>
+
 {% endblock %}
