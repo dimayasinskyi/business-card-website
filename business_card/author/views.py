@@ -71,7 +71,7 @@ class ContactCreateView(TemplateView):
                 from_email=None,
                 to=["dmitriymorkov83@gmail.com"],
             )
-            uploaded_file = request.FILES["file"]
+            uploaded_file = request.FILES.get("file")
             
             if uploaded_file:
                 email.attach(uploaded_file.name, uploaded_file.read(), uploaded_file.content_type)
