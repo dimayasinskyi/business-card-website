@@ -1,4 +1,5 @@
 business_card/media
+media
 business_card/db.sqlite3
 venv
 .env

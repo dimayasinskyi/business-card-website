@@ -27,7 +27,7 @@ class CustomerUser(AbstractUser):
     - __str__: returns the full username or username
     - save: added instantiation of Contact models to standard behavior
     """
-    photo = models.ImageField(upload_to="photos/user/", blank=True, verbose_name=constants.VERBOSE_PHOTO)
+    photo = models.ImageField(upload_to="user/", blank=True, verbose_name=constants.VERBOSE_PHOTO)
     about = models.TextField(blank=True, verbose_name=constants.VERBOSE_ABOUT)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=constants.VERBOSE_CREATED_AT)
 
@@ -66,7 +66,7 @@ class PortFolio(models.Model):
     name = models.CharField(max_length=150, blank=True, verbose_name=constants.VERBOSE_NAME)
     github = models.URLField(blank=True, verbose_name=constants.VERBOSE_GITHUB)
     url = models.URLField(blank=True, verbose_name=constants.VERBOSE_URL)
-    photo = models.ImageField(upload_to="photos/portgolio/", blank=True, null=True, verbose_name=constants.VERBOSE_PHOTO)
+    photo = models.ImageField(upload_to="portgolio/", blank=True, null=True, verbose_name=constants.VERBOSE_PHOTO)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=constants.VERBOSE_CREATED_AT)
 
     class Meta:

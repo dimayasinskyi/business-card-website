@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from ..models import PortFolio, Contact
+from .tests_settings import MediaCleanTestCase
 
 
 User = get_user_model()
@@ -20,8 +21,9 @@ class HomeViewTests(TestCase):
         self.assertEqual(user_in_context.about, self.user.about)
 
 
-class ContactViewTests(TestCase):
+class ContactViewTests(MediaCleanTestCase):
     def setUp(self):
+        super().setUp()
         self.user = User.objects.create_user(username="testuser", password="11", about="test")
         Contact.objects.filter(user=self.user).update(phone="38012345")
         self.contact = Contact.objects.get(user=self.user)

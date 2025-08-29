@@ -2,10 +2,12 @@ from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from ..models import PortFolio, Contact, CustomerUser
+from .tests_settings import MediaCleanTestCase
 
 
-class CustomerUserModelTests(TestCase):
+class CustomerUserModelTests(MediaCleanTestCase):
     def setUp(self):
+        super().setUp()
         photo_content = (
             b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01'
             b'\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15\xc4\x89'
@@ -23,6 +25,7 @@ class CustomerUserModelTests(TestCase):
             }
         
         self.user = CustomerUser.objects.create_user(**self.valid_data, password="11")
+    
 
     def test_create(self):
         self.assertTrue(self.user.photo.name.endswith(".png"), msg=f"The image or photo field address is not saved correctly. {self.user.photo.name}")
@@ -52,8 +55,9 @@ class CustomerUserModelTests(TestCase):
         self.assertEqual(str(user), user.get_full_name(), msg=f'not correct str "{str(user)}" no "{user.get_full_name()}"')
 
 
-class PortFolioModelTests(TestCase):
+class PortFolioModelTests(MediaCleanTestCase):
     def setUp(self):
+        super().setUp()
         photo_content = (
             b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01'
             b'\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15\xc4\x89'

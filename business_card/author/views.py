@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMessage
@@ -51,7 +51,7 @@ class ContactCreateView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["contact"] = Contact.objects.get(user=get_user())
+        context["contact"] = get_object_or_404(Contact, user=get_user())
         context["form"] = ContactForm()
         
         return context

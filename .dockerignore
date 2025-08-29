@@ -2,7 +2,9 @@ venv
 .git
 .gitignore
 __pycache__/
-db.sqlite3
+media
+business_card/media
+business_card/db.sqlite3
 .env
 .env.dev
 .env.prod
