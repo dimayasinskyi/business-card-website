@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin.sites import AdminSite
 
 from .models import Contact, CustomerUser, PortFolio
 
@@ -9,8 +10,12 @@ admin.site.register(PortFolio)
 class PortFolioInline(admin.TabularInline):
     model = PortFolio
     extra = 1
-    
 
+    class Media:
+        css = {
+            "all": ["admin.css"]
+        }
+    
 
 class ContactInline(admin.StackedInline):
     model = Contact

@@ -14,7 +14,7 @@
     {% if contact %}
     <ul class="contact-list">
       {% if contact.phone %}
-      <li><strong>📞 Телефон:</strong> {{ contact.phone }}</li>
+      <li><strong>📞 Phone number:</strong> {{ contact.phone }}</li>
       {% endif %}
       {% if contact.telegram %}
       <li><strong>💬 Telegram:</strong> <a href="{{ contact.telegram }}" target="_blank">{{ contact.telegram }}</a></li>
@@ -26,12 +26,12 @@
       <li><strong>🐙 GitHub:</strong> <a href="{{ contact.github }}" target="_blank">{{ contact.github }}</a></li>
       {% endif %}
       {% if contact.address %}
-      <li><strong>📍 Адреса:</strong> {{ contact.address }}</li>
+      <li><strong>📍 Address:</strong> {{ contact.address }}</li>
       {% endif %}
     </ul>
     {% else %}
     <p>Contacts have not been added yet.</p>
     {% endif %}
-    {% include 'included\contact_form.html' %}
+    {% include 'included/contact_form.html' %}
 </section>
 {% endblock %}

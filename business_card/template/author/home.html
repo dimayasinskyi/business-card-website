@@ -4,14 +4,6 @@
 {% block title %}{{ user.get_full_name }}{% endblock %}
 
 {% block content %}
-<!-- <main class="container text-center mt-5">
-  <h1 class="mb-4">Welcome!</h1>
-  <h2 class="mb-3">{{ user.get_full_name }}</h2>
-  {% if user.photo %}
-    <img src="{{ user.photo.url }}" alt="{{ user.username }}" class="profile-img">
-  {% endif %}
-  <p class="about-text mt-3">{{ user.about }}</p>
-</main> -->
 <section class="section">
   <div class="container hero">
     <div>
@@ -23,22 +15,12 @@
       </div>
     </div>
 
-    <aside class="hero-card" aria-label="Краткая статистика">
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="num">100%</div>
-          <div class="cap">Адаптивность</div>
-        </div>
-        <div class="stat">
-          <div class="num">0 JS</div>
-          <div class="cap">Только CSS</div>
-        </div>
-        <div class="stat">
-          <div class="num"><span aria-hidden="true">⚡</span> Быстро</div>
-          <div class="cap">Оптимально</div>
-        </div>
-      </div>
+    {% if user.photo %}
+    <aside class="hero-card" aria-label="User photo">
+      <img src="{{ user.photo.url }}" alt="{{ user.get_full_name }}"
+        style="width: 100%; height: 100%; object-fit: cover;">
     </aside>
+    {% endif %}
   </div>
 </section>
 {% endblock %}

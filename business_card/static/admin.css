@@ -1,0 +1,11 @@
+.inline-group table tbody tr.form-row td {
+  vertical-align: bottom;
+  padding: 5px 10px;
+}
+.inline-group table tbody tr.form-row td.original {
+  vertical-align: top;
+}
+
+.inline-group table tbody tr.form-row td {
+  max-width: 600px;
+}
