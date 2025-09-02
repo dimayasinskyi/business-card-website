@@ -1,1 +1,15 @@
-[{"model": "author.contact", "pk": 2, "fields": {"user": 2, "phone": "+380970825679", "telegram": "https://t.me/YasD1m", "linkedin": "https://www.linkedin.com/in/dmitry-yasinsky-83a265366/?locale=en_US", "github": "https://github.com/dimayasinskyi", "address": "Ukraine, Vinnytsia region, city Vinnytsia", "created_at": "2025-08-29T16:57:56.434Z"}}]
+[
+  {
+    "model": "author.contact",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "phone": "+380970825679",
+      "telegram": "https://t.me/YasD1m",
+      "linkedin": "https://www.linkedin.com/in/dmitry-yasinsky-83a265366/?locale=en_US",
+      "github": "https://github.com/dimayasinskyi",
+      "address": "Ukraine, Vinnytsia region, city Vinnytsia",
+      "created_at": "2025-08-29T16:57:56.434Z"
+    }
+  }
+]

@@ -3,3 +3,5 @@ media
 business_card/db.sqlite3
 venv
 .env
+nginx
+docker-compose.yml
