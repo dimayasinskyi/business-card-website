@@ -1,9 +1,9 @@
 [
   {
     "model": "author.contact",
-    "pk": 2,
+    "pk": 1,
     "fields": {
-      "user": 2,
+      "user": 1,
       "phone": "+380970825679",
       "telegram": "https://t.me/YasD1m",
       "linkedin": "https://www.linkedin.com/in/dmitry-yasinsky-83a265366/?locale=en_US",

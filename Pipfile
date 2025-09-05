@@ -11,6 +11,8 @@ psycopg2-binary = "==2.9.9"
 gunicorn = "==23.0.0"
 django-cleanup = "==9.0.0"
 whitenoise = "==6.9.0"
+cloudinary = "==1.44.1"
+django-cloudinary-storage = "==0.3.0"
 
 [dev-packages]
 
