@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import get_user_model
-from django.core.mail import EmailMessage
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 from .models import Contact, PortFolio
 from .forms import ContactForm
+from .tasks import send_email_task
 
 
 User = get_user_model()
@@ -65,18 +67,20 @@ class ContactCreateView(TemplateView):
                 if field != 'file':
                     message += f"{field}: {value}\n"
 
-            email = EmailMessage(
-                subject="Повідомлення від сайту визітки",
-                body=message,
-                from_email=None,
-                to=["dmitriymorkov83@gmail.com"],
-            )
-            uploaded_file = request.FILES.get("file")
-            
-            if uploaded_file:
-                email.attach(uploaded_file.name, uploaded_file.read(), uploaded_file.content_type)
+            uploaded_file = request.FILES.get('file')
 
-            email.send(fail_silently=False)
+            if uploaded_file:
+                file_path = default_storage.save(f"temp/{uploaded_file.name}", ContentFile(uploaded_file.read()))
+            else:
+                file_path = None
+                
+            send_email_task.delay(
+                subject="messages from business card sites",
+                message=message,
+                email=["dmitriymorkov83@gmail.com"],
+                file_path=file_path,
+                )
+
             return self.render_to_response(
                 self.get_context_data(success=True, form=ContactForm())
             )
