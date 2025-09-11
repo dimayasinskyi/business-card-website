@@ -1,8 +1,7 @@
 FROM python:3.12.7
 WORKDIR /usr/src/app
-COPY Pipfile Pipfile.lock ./
-RUN pip install pipenv
-RUN pipenv install --deploy --system 
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 COPY . .
 
 COPY entrypoint.sh /usr/src/app/entrypoint.sh

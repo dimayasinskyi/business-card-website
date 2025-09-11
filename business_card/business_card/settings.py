@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False) == "True"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
 
 
 # Application definition
@@ -101,10 +101,16 @@ if DEBUG:
             'PORT': '5432',
         }
     }
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / "db.sqlite3",
+    #     }
+    # }
 else:
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
+            default=os.getenv('DATABASE_URL'),
             conn_max_age=600,
             ssl_require=True,
         )
@@ -173,6 +179,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "apikey"
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = "websitebusinesscard@gmail.com"
+EMAIL_RECIPIENT = ["dmitriymorkov83@gmail.com"]
 
 # CELERY
 CELERY_BROKER_URL = os.getenv("REDIS_URL")
@@ -180,3 +187,8 @@ CELERY_RESULT_BCKEND = os.getenv("REDIS_URL")
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+# TELEGRAM BOT
+
+TELEGRAM_USER_ID = "1460797365"
+TELEGRAM_API_URL = os.getenv("TELEGRAM_API_URL")

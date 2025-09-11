@@ -1,12 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import get_user_model
+from django.contrib import messages
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
 from .models import Contact, PortFolio
 from .forms import ContactForm
-from .tasks import send_email_task
+from .tasks import send_messange_task, send_telegram
 
 
 User = get_user_model()
@@ -55,7 +56,7 @@ class ContactCreateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["contact"] = get_object_or_404(Contact, user=get_user())
         context["form"] = ContactForm()
-        
+
         return context
     
     def post(self, request, *args, **kwargs):
@@ -65,7 +66,8 @@ class ContactCreateView(TemplateView):
 
             for field, value in form.cleaned_data.items():
                 if field != 'file':
-                    message += f"{field}: {value}\n"
+                    if value:
+                        message += f"{field}: {value}\n"
 
             uploaded_file = request.FILES.get('file')
 
@@ -74,15 +76,16 @@ class ContactCreateView(TemplateView):
             else:
                 file_path = None
                 
-            send_email_task.delay(
-                subject="messages from business card sites",
+            send_messange_task.delay(
                 message=message,
-                email=["dmitriymorkov83@gmail.com"],
                 file_path=file_path,
                 )
+            messages.success(request, "The form has been successfully submitted.")
 
-            return self.render_to_response(
-                self.get_context_data(success=True, form=ContactForm())
-            )
+            return redirect("author:contact")
         
-        return self.render_to_response(self.get_context_data(form=form, errors=form.errors.values))
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(request, error)
+
+        return self.render_to_response(self.get_context_data(form=form))
