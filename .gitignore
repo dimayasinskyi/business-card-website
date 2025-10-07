@@ -1,7 +1,7 @@
-business_card/media
 media
-business_card/db.sqlite3
+db.sqlite3
 venv
 .env
 nginx
 docker-compose.yml
+__pycache__/
