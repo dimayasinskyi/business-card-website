@@ -2,7 +2,6 @@
 
 **business_card_website** is a simple website to present yourself and your projects, as well as a contact form with contact information.
 
-**url**
 - Render: (https://business-card-website-qq6z.onrender.com/)
 
 ---

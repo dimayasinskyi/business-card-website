@@ -9,4 +9,4 @@ cloudinary==1.44.1
 django-cloudinary-storage==0.3.0
 celery==5.5.3
 redis==6.4.0
-dj-database-url==3.0.1
+# dj-database-url==3.0.1

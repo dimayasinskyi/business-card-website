@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-import dj_database_url
+# import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,28 +93,24 @@ WSGI_APPLICATION = 'business_card.wsgi.application'
 if DEBUG:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'mydb',
-            'USER': 'Dima',
-            'PASSWORD': '11',
-            'HOST': 'localhost',
-            'PORT': '5432',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / "db.sqlite3",
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / "db.sqlite3",
         }
     }
     # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': BASE_DIR / "db.sqlite3",
-    #     }
+    #     'default': dj_database_url.config(
+    #         default=os.getenv('DATABASE_URL'),
+    #         conn_max_age=600,
+    #         ssl_require=True,
+    #     )
     # }
-else:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=os.getenv('DATABASE_URL'),
-            conn_max_age=600,
-            ssl_require=True,
-        )
-    }
 
 
 # Password validation
