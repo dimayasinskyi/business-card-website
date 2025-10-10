@@ -178,11 +178,13 @@ DEFAULT_FROM_EMAIL = "websitebusinesscard@gmail.com"
 EMAIL_RECIPIENT = ["dmitriymorkov83@gmail.com"]
 
 # CELERY
+
 CELERY_BROKER_URL = os.getenv("REDIS_URL")
-CELERY_RESULT_BCKEND = os.getenv("REDIS_URL")
+CELERY_RESULT_BACKEND = os.getenv("REDIS_URL")
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = "Europe/Kiev"
 
 # TELEGRAM BOT
 

@@ -7,7 +7,7 @@ from django.core.files.base import ContentFile
 
 from .models import Contact, PortFolio
 from .forms import ContactForm
-from .tasks import send_messange_task, send_telegram
+from .tasks import send_messange_task
 
 
 User = get_user_model()
