@@ -7,26 +7,23 @@ python /usr/src/app/business_card/manage.py loaddata /usr/src/app/business_card/
 python /usr/src/app/business_card/manage.py loaddata /usr/src/app/business_card/author/fixtures/contact.json
 python /usr/src/app/business_card/manage.py loaddata /usr/src/app/business_card/author/fixtures/portfolio.json
 
+echo "Django is running..."
 exec gunicorn --chdir /usr/src/app/business_card/ business_card.wsgi:application --bind 0.0.0.0:8000 &
 WEB_PID=$!
-echo "Django is running"
-
 
 sleep 3
 
+echo "Celery is running..."
 celery --workdir /usr/src/app/business_card/ -A business_card worker --loglevel=info &
 WORKER_PID=$!
 
-celery --workdir /usr/src/app/business_card/ -A business_card beat --loglevel=info &
-BEAT_PID=$!
-echo "Celery is running"
 
 while true; do
-    for pid in $WEB_PID $WORKER_PID $BEAT_PID; do
+    for pid in $WEB_PID $WORKER_PID; do
         if ! kill -0 $pid 2>/dev/null; then
             EXIT_CODE=1
             echo "Process $pid exited. Stopping others..."
-            kill -TERM $WEB_PID $WORKER_PID $BEAT_PID 2>/dev/null || true
+            kill -TERM $WEB_PID $WORKER_PID 2>/dev/null || true
             exit $EXIT_CODE
         fi
     done

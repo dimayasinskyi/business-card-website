@@ -1,10 +1,8 @@
 venv
 .git
-.gitignore
-__pycache__/
-media
-business_card/media
-business_card/db.sqlite3
 .env
-nginx
-docker-compose.yml
+.gitignore
+db.sqlite3
+__pycache__/
+staticfiles/
+media/

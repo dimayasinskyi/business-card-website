@@ -1,7 +1,6 @@
-media
-db.sqlite3
 venv
 .env
-nginx
-docker-compose.yml
+db.sqlite3
 __pycache__/
+staticfiles/
+media/
